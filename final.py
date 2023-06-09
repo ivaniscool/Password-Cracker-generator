@@ -38,14 +38,14 @@ def calculate_strength(password):
         strength_table[2][i] = strength_table[2][i - 1] + 1 if password[i - 1].isdigit() else strength_table[2][i - 1]
         strength_table[3][i] = strength_table[3][i - 1] + 1 if not password[i - 1].isalnum() else strength_table[3][i - 1]
 
-    strength = (strength_table[0][length] * 2 +
-                strength_table[1][length] * 2 +
+    strength = (strength_table[0][length] * 1 +
+                strength_table[1][length] * 1 +
                 strength_table[2][length] * 2 +
                 strength_table[3][length] * 3 +
-                uppercase * 2 +
-                lowercase * 2 +
-                digits * 2 +
-                special_chars * 3) / (length + 1) * 100
+                uppercase * 1 +
+                lowercase * 0.3 +
+                digits * 3 +
+                special_chars * 4) / (length + 1) * 100
 
     return int(strength)
 
@@ -79,7 +79,7 @@ def generate_strong_password(length):
 def check_password_strength():
     password = password_entry.get()
     strength = calculate_strength(password)
-    strength_label.configure(text="Password Strength: {}%".format(strength//4.35))
+    strength_label.configure(text="Password Strength: {}%".format(strength//4))
 
 def quit_application():
     root.destroy()
