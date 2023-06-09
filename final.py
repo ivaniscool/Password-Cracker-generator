@@ -5,6 +5,7 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import font
 from zxcvbn import zxcvbn
+import tkinter.messagebox as messagebox
 
 password_file_name = "rockyou (1).txt"
 memo = {}
@@ -82,7 +83,9 @@ def check_password_strength():
     strength_label.configure(text="Password Strength: {}%".format(strength//4))
 
 def quit_application():
-    root.destroy()
+    confirm = messagebox.askquestion("Confirmation", "Are you sure you want to quit?")
+    if confirm == 'yes':
+        root.destroy()
 
 root = tk.Tk()
 root.title("Password Checker")
